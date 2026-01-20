@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cg-image-scroll-reveal | @codegrid</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="header">
+      <p>Scroll To Reveal</p>
+      <p>Codegrid</p>
+    </div>
+    <div class="container">
+      <div class="row" id="row-1">
+        <div class="col">
+          <div class="img-container right">
+            <img src="./images/img-1.jpg" alt="" />
+            <p>Lunar dreamscape</p>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row" id="row-2">
+        <div class="col"></div>
+        <div class="col">
+          <div class="img-container left">
+            <img src="./images/img-2.jpg" alt="" />
+            <p>Futuristic control relic</p>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="row-3">
+        <div class="col">
+          <div class="img-container right">
+            <img src="./images/img-3.jpg" alt="" />
+            <p>Neo-Tokyo crimson glow</p>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row" id="row-4">
+        <div class="col"></div>
+        <div class="col">
+          <div class="img-container left">
+            <img src="./images/img-4.jpg" alt="" />
+            <p>Galactic ocean abyss</p>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="row-5">
+        <div class="col">
+          <div class="img-container right">
+            <img src="./images/img-5.jpg" alt="" />
+            <p>Hued cosmic dust</p>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row" id="row-6">
+        <div class="col"></div>
+        <div class="col">
+          <div class="img-container left">
+            <img src="./images/img-6.jpg" alt="" />
+            <p>Silent sentinel</p>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="row-7">
+        <div class="col">
+          <div class="img-container right">
+            <img src="./images/img-7.jpg" alt="" />
+            <p>Ethereal quantum</p>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row" id="row-8">
+        <div class="col"></div>
+        <div class="col">
+          <div class="img-container left">
+            <img src="./images/img-8.jpg" alt="" />
+            <p>Galactic sister anomalies</p>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="row-9">
+        <div class="col">
+          <div class="img-container right">
+            <img src="./images/img-9.jpg" alt="" />
+            <p>Luminous drifters</p>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row" id="row-10">
+        <div class="col"></div>
+        <div class="col">
+          <div class="img-container left">
+            <img src="./images/img-10.jpg" alt="" />
+            <p>Portal void beyond</p>
+          </div>
+        </div>
+      </div>
+      <div class="whitespace"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function isInViewport(el) {
+          const rect = el.getBoundingClientRect();
+          return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <=
+              (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <=
+              (window.innerWidth || document.documentElement.clientWidth)
+          );
+        }
+
+        const rows = document.querySelectorAll(".row");
+        rows.forEach((row) => {
+          if (isInViewport(row)) {
+            const img = row.querySelector("img");
+            if (row.querySelector(".left")) {
+              gsap.to(img, {
+                clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+              });
+            } else {
+              gsap.to(img, {
+                clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+              });
+            }
+          }
+        });
+
+        gsap.utils.toArray(".img-container.right img").forEach((img) => {
+          gsap.to(img, {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            scrollTrigger: {
+              trigger: img,
+              start: "top 75%",
+              end: "bottom 70%",
+              scrub: true,
+            },
+          });
+        });
+
+        gsap.utils.toArray(".img-container.left img").forEach((img) => {
+          gsap.to(img, {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            scrollTrigger: {
+              trigger: img,
+              start: "top 75%",
+              end: "bottom 70%",
+              scrub: true,
+            },
+          });
+        });
+
+        gsap.utils.toArray(".img-container p").forEach((text) => {
+          gsap.from(text, {
+            opacity: 0,
+            y: 20,
+            scrollTrigger: {
+              trigger: text,
+              start: "top 90%",
+              toggleActions: "play none none reverse",
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

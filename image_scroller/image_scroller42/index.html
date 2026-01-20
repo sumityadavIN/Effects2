@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Classic Cuve - Product Page</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <nav>
+      <div id="logo">Val Doca</div>
+      <div id="toggleOverlay">Catalog</div>
+    </nav>
+    <div class="title">Classic Cuvées</div>
+  </div>
+  <div class="wines">
+    <div class="wrapper">
+      <svg class="transition" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path class="path" stroke="#36301D" fill="#36301D" stroke-width="2px" dur="10s"
+          vector-effect="non-scaling-stroke" d="M 0 100 V 100 Q 50 100 100 100 V 100 z" />
+        <animateMotion dur="10s" repeatCount="indefinite">
+          <mpath xlink:href="#path" />
+        </animateMotion>
+
+        <div id="wrap">
+          <div class="block">
+            <div class="product">
+              <img src="./wines/wine-1.png" alt="" />
+            </div>
+          </div>
+          <div class="block">
+            <div class="product">
+              <img src="./wines/wine-2.png" alt="" />
+            </div>
+          </div>
+          <div class="block">
+            <div class="product">
+              <img src="./wines/wine-3.png" alt="" />
+            </div>
+          </div>
+          <div class="block">
+            <div class="product">
+              <img src="./wines/wine-4.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </svg>
+    </div>
+    <button id="closeBtn">Close</button>
+  </div>
+
+  <script type="text/javascript">
+    window.addEventListener("DOMContentLoaded", function () {
+      var docWidth = document.body.clientWidth;
+      var wrap = document.querySelector("#wrap");
+      var images = document.querySelectorAll("#wrap .block");
+      var slidesWidth = wrap.clientWidth;
+      var currentOffset = 0;
+      var targetOffset = 0;
+      var isAnimating = false;
+
+      window.addEventListener("resize", function () {
+        docWidth = document.body.clientWidth;
+        slidesWidth = wrap.clientWidth;
+      });
+
+      document.addEventListener("mousemove", function (e) {
+        var mouseX = e.pageX;
+        targetOffset = -1 * ((mouseX / docWidth) * slidesWidth - mouseX / 2);
+        if (!isAnimating) {
+          requestAnimationFrame(updateOffset);
+        }
+      });
+
+      function updateOffset() {
+        isAnimating = true;
+        currentOffset = lerp(currentOffset, targetOffset, 0.075);
+        if (Math.abs(currentOffset - targetOffset) < 0.5) {
+          currentOffset = targetOffset;
+          isAnimating = false;
+        }
+        for (var i = 0; i < images.length; i++) {
+          images[i].style.webkitTransform =
+            "translate3d(" + currentOffset + "px,0,0)";
+          images[i].style.transform =
+            "translate3d(" + currentOffset + "px,0,0)";
+        }
+        if (isAnimating) {
+          requestAnimationFrame(updateOffset);
+        }
+      }
+
+      function lerp(a, b, t) {
+        return (1 - t) * a + t * b;
+      }
+    });
+
+    const tl = gsap.timeline({ paused: true });
+
+    let $path = document.querySelector(".path");
+
+    function showInfo() {
+      revealDescription();
+
+      const showBtn = document.getElementById("toggleOverlay");
+      showBtn.onclick = function (e) {
+        tl.reversed(!tl.reversed());
+      };
+
+      const closeBtn = document.getElementById("closeBtn");
+      closeBtn.onclick = function (e) {
+        tl.reversed(!tl.reversed());
+      };
+    }
+
+    showInfo();
+
+    function revealDescription() {
+      const start = "M 0 100 V 50 Q 50 0 100 50 V 100 z";
+      const end = "M 0 100 V 0 Q 50 0 100 0 V 100 z";
+      tl.to(".wines", 0.1, {
+        opacity: 1,
+        ease: "power2.inOut",
+      });
+
+      tl.to($path, 0.8, { attr: { d: start }, ease: Power3.easeIn }).to(
+        $path,
+        0.4,
+        { attr: { d: end }, ease: Power3.easeOut }
+      );
+
+      tl.from(".block", 1, {
+        clipPath: "inset(0 100% 0 0)",
+        // top: "100%",
+        ease: Power4.easeOut,
+
+        stagger: {
+          amount: 0.25,
+        },
+      });
+
+      tl.from(
+        ".product img",
+        1,
+        {
+          scale: 3,
+          ease: Power4.easeOut,
+          stagger: {
+            amount: 0.25,
+          },
+        },
+        "-=1.5"
+      );
+
+      tl.from(
+        "#closeBtn",
+        1,
+        {
+          opacity: 0,
+          right: "-25%",
+          ease: "power2.inOut",
+        },
+        "-=1"
+      ).reverse();
+    }
+  </script>
+</body>
+
+</html>

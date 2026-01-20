@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>responsive product page | @codegrid</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="nav">
+      <div class="btn-group">
+        <button><i class="ph-bold ph-arrow-left"></i> drop 4</button>
+        <button class="active">
+          <i class="ph-bold ph-arrow-down"></i> sizing chart
+        </button>
+      </div>
+      <div class="btn-group">
+        <button class="active">usd</button>
+        <button>bag</button>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <div class="col product-img">
+        <div class="product-img-wrapper">
+          <img src="./1.png" alt="" />
+        </div>
+      </div>
+      <div class="col product-copy">
+        <div class="product-details">
+          <p data-text="02 SHIRT ROCK">02 SHIRT ROCK</p>
+          <br />
+          <p>180.00 USD</p>
+          <br />
+          <p>- 100% cotton poplin</p>
+          <p>- 130gsm</p>
+          <p>- shoulder to arm panel</p>
+          <p>- underarm to hem panel</p>
+          <p>- button closure</p>
+          <p>- vertical chest zip pocket</p>
+          <p>- waist pockets with zip closure</p>
+          <p>- ukk zips</p>
+        </div>
+
+        <div class="product-vars">
+          <img src="./img1.webp" alt="" />
+          <img src="./img2.webp" alt="" />
+          <img src="./img3.webp" alt="" />
+        </div>
+
+        <div class="product-size">
+          <div class="size">XXS</div>
+          <div class="size">XS</div>
+          <div class="size">S</div>
+          <div class="size">M</div>
+          <div class="size">L</div>
+          <div class="size">XL</div>
+          <div class="size">XXL</div>
+        </div>
+
+        <button class="size-btn">
+          select your size <i class="ph-bold ph-arrow-right"></i>
+        </button>
+
+        <div class="other-products">
+          <div class="product">
+            <img src="./product1.webp" alt="" />
+            <p>01 BLAZER BEAT</p>
+          </div>
+          <div class="product">
+            <img src="./product2.webp" alt="" />
+            <p>03 DENIM DREAM</p>
+          </div>
+          <div class="product">
+            <img src="./product3.webp" alt="" />
+            <p>04 BOHO BREEZE</p>
+          </div>
+          <div class="product">
+            <img src="./product4.webp" alt="" />
+            <p>05 SILK SAGA</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const productCopy = document.querySelector(".product-copy");
+        const productImage = document.querySelector(".product-img img");
+        const segmentHeight =
+          (productCopy.scrollHeight - window.innerHeight) / 8;
+
+        window.addEventListener("scroll", function () {
+          let currentSegment = Math.floor(window.scrollY / segmentHeight) + 1;
+          currentSegment = Math.min(9, Math.max(1, currentSegment));
+          productImage.src = "./" + currentSegment + ".png";
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        function randomCharacter() {
+          const chars =
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+          return chars[Math.floor(Math.random() * chars.length)];
+        }
+
+        function setInitialDataTextAttribute() {
+          const paragraphs = document.querySelectorAll("p");
+          paragraphs.forEach((p) => {
+            const textContent = p.textContent.trim();
+            if (!p.getAttribute("data-text") && textContent) {
+              p.setAttribute("data-text", textContent);
+              p.textContent = "";
+            }
+          });
+        }
+
+        function revealText(element) {
+          const originalText = element.getAttribute("data-text");
+          let revealedText = "";
+          let index = 0;
+
+          function revealNextLetter() {
+            if (index < originalText.length) {
+              revealedText += originalText[index];
+              let tempText = revealedText;
+
+              for (let i = index + 1; i < originalText.length; i++) {
+                tempText += randomCharacter();
+              }
+
+              element.textContent = tempText;
+              index++;
+
+              setTimeout(revealNextLetter, 50);
+            } else {
+              element.textContent = originalText;
+            }
+          }
+
+          revealNextLetter();
+        }
+
+        setInitialDataTextAttribute();
+
+        const paragraphs = document.querySelectorAll("p[data-text]");
+        paragraphs.forEach((p) => {
+          revealText(p);
+        });
+      });
+
+      gsap.from(".nav", {
+        duration: 0.5,
+        y: -50,
+        delay: 0,
+      });
+
+      gsap.from(".product-img", {
+        duration: 0.5,
+        x: -100,
+        opacity: 0,
+        delay: 0.5,
+      });
+
+      gsap.from(".product-vars img", {
+        duration: 0.5,
+        y: 50,
+        opacity: 0,
+        stagger: 0.2,
+        delay: 0.75,
+      });
+
+      gsap.from(".product-size .size", {
+        duration: 0.5,
+        x: 50,
+        opacity: 0,
+        stagger: 0.025,
+        delay: 1,
+      });
+
+      gsap.from(".size-btn", {
+        duration: 0.3,
+        scale: 0,
+        delay: 1.25,
+      });
+
+      gsap.from(".product", {
+        duration: 0.5,
+        y: 50,
+        opacity: 0,
+        stagger: 0.25,
+        delay: 1.5,
+      });
+    </script>
+  </body>
+</html>

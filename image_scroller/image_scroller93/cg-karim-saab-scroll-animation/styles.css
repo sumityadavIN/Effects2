@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-family: "Barlow Condensed";
+  font-size: 6rem;
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.02rem;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+nav {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35%;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  z-index: 2;
+}
+
+nav img {
+  width: 1.5rem;
+  object-fit: contain;
+}
+section {
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  background-color: #161616;
+  color: #fff;
+  overflow: hidden;
+}
+
+.intro,
+.outro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 50%;
+  z-index: 1;
+}
+
+.spotlight {
+  background-color: #101010;
+}
+
+.spotlight-images {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 300svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateY(5%);
+  will-change: transform;
+}
+
+.row {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.img {
+  flex: 1;
+  aspect-ratio: 5/7;
+  overflow: hidden;
+}
+
+.img img {
+  opacity: 0.5;
+  filter: saturate(0);
+}
+
+.mask-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100svh;
+  -webkit-mask: url(/spotlight-mask.svg) center/contain no-repeat;
+  mask: url(/spotlight-mask.svg) center/contain no-repeat;
+  overflow: hidden;
+  -webkit-mask-size: 0%;
+  mask-size: 0%;
+  z-index: 10;
+}
+
+.mask-container .mask-img {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 1000px) {
+  h1 {
+    font-size: 4rem;
+  }
+
+  nav,
+  .header {
+    width: calc(100% - 4rem);
+  }
+
+  .spotlight-images {
+    width: 200vw;
+    left: -25vw;
+  }
+}

@@ -1,0 +1,1 @@
+C:\xampp\htdocs\effects\CodeGrid_Zip\Effects - Copy\SCROLLING WAS MID, SO I MADE IT INFINITE WITH A PARALLAX EFFECT THAT SNAPS (AND A FREAKING MINIMAP)\codegrid-infinite-parallax-scroll-with-minimap\index.html

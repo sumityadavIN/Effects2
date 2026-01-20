@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+section.hero-img,
+section.about-img {
+  position: relative;
+  height: 200vh;
+}
+
+.hero {
+  background: #757637;
+}
+
+.about {
+  background: #375955;
+}
+
+.footer {
+  background: #645439;
+}
+
+h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Saans TRIAL";
+  font-size: 12vw;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: #000;
+  opacity: 0.5;
+}
+
+.blocks-container {
+  position: absolute;
+  width: 100%;
+  height: 400px;
+}
+
+.blocks-container.top {
+  top: 0;
+}
+
+.blocks-container.bottom {
+  bottom: 0;
+}
+
+.blocks-row {
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  display: flex;
+}
+
+.block {
+  width: 100px;
+  height: 100px;
+  transition: opacity 250ms;
+}
+
+.blocks-container.top .blocks-row .block {
+  opacity: 1;
+}
+
+.blocks-container.bottom .blocks-row .block {
+  opacity: 0;
+}
+
+.hero-img .blocks-container.top .blocks-row .block {
+  background: #757637;
+}
+
+.hero-img .blocks-container.bottom .blocks-row .block {
+  background: #375955;
+}
+
+.about-img .blocks-container.top .blocks-row .block {
+  background: #375955;
+}
+
+.about-img .blocks-container.bottom .blocks-row .block {
+  background: #645439;
+}

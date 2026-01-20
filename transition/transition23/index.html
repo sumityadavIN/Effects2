@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Marquee animation on scroll | Codegrid</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section class="spacer"></section>
+
+    <section class="marquee">
+      <div class="marquee__inner">
+        <div class="marquee__part">
+          modern creative studio
+          <div class="arrow">
+            <img src="./assets/arrow.svg" alt="" />
+          </div>
+        </div>
+        <div class="marquee__part">
+          modern creative studio
+          <div class="arrow">
+            <img src="./assets/arrow.svg" alt="" />
+          </div>
+        </div>
+        <div class="marquee__part">
+          modern creative studio
+          <div class="arrow">
+            <img src="./assets/arrow.svg" alt="" />
+          </div>
+        </div>
+        <div class="marquee__part">
+          modern creative studio
+          <div class="arrow">
+            <img src="./assets/arrow.svg" alt="" />
+          </div>
+        </div>
+        <div class="marquee__part">
+          modern creative studio
+          <div class="arrow">
+            <img src="./assets/arrow.svg" alt="" />
+          </div>
+        </div>
+        <div class="marquee__part">
+          modern creative studio
+          <div class="arrow">
+            <img src="./assets/arrow.svg" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="spacer"></section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script>
+      let currentScroll = 0;
+      let isScrollingDown = true;
+      let arrows = document.querySelectorAll(".arrow");
+
+      let tween = gsap
+        .to(".marquee__part", {
+          xPercent: -100,
+          repeat: -1,
+          duration: 5,
+          ease: "linear",
+        })
+        .totalProgress(0.5);
+
+      gsap.set(".marquee__inner", { xPercent: -50 });
+
+      window.addEventListener("scroll", function () {
+        if (window.pageYOffset > currentScroll) {
+          isScrollingDown = true;
+        } else {
+          isScrollingDown = false;
+        }
+
+        gsap.to(tween, {
+          timeScale: isScrollingDown ? 1 : -1,
+        });
+
+        arrows.forEach((arrow) => {
+          if (isScrollingDown) {
+            arrow.classList.remove("active");
+          } else {
+            arrow.classList.add("active");
+          }
+        });
+
+        currentScroll = window.pageYOffset;
+      });
+    </script>
+  </body>
+</html>

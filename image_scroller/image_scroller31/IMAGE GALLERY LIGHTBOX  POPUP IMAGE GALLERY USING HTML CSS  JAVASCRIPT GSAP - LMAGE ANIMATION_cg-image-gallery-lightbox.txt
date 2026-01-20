@@ -1,0 +1,1 @@
+Source Path: C:\xampp\htdocs\effects\CodeGrid_Zip\Effects - Copy\IMAGE GALLERY LIGHTBOX  POPUP IMAGE GALLERY USING HTML, CSS & JAVASCRIPT (GSAP) - LMAGE ANIMATION\cg-image-gallery-lightbox\index.html

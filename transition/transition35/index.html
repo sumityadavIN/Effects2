@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OrkenWorld Scroll Animation | Codegrid</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <section class="hero">
+        <h1><span>Enter a Universe</span> Powered by Imagination</h1>
+      </section>
+
+      <section class="sticky">
+        <div class="bg-img"><img src="./assets/bg.jpg" alt="" /></div>
+
+        <canvas class="outline-layer"></canvas>
+
+        <div class="cards">
+          <div class="card">
+            <div class="card-img"><img src="./assets/card-1.jpg" alt="" /></div>
+            <div class="card-title">
+              <h1>Silent Veil</h1>
+              <p>PROD8372</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-img"><img src="./assets/card-2.jpg" alt="" /></div>
+            <div class="card-title">
+              <h1>Crimson Echoes</h1>
+              <p>PROD4921</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-img"><img src="./assets/card-3.jpg" alt="" /></div>
+            <div class="card-title">
+              <h1>Zenith Arc</h1>
+              <p>PROD7586</p>
+            </div>
+          </div>
+        </div>
+
+        <canvas class="fill-layer"></canvas>
+      </section>
+
+      <section class="outro">
+        <h1>Chase the <span>shadows</span> to embrace the light</h1>
+      </section>
+    </div>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

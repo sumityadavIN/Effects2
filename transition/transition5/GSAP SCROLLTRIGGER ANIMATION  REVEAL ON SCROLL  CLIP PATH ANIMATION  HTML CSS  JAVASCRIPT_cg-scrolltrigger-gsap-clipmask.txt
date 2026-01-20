@@ -1,0 +1,1 @@
+Source Path: C:\xampp\htdocs\effects\CodeGrid_Zip\Effects - Copy\GSAP SCROLLTRIGGER ANIMATION  REVEAL ON SCROLL  CLIP PATH ANIMATION  HTML, CSS & JAVASCRIPT\cg-scrolltrigger-gsap-clipmask\index.html

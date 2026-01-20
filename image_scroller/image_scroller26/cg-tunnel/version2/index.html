@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Tunnel Image Slider Carousel | Codegrid</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-items">
+        <a href="#">Works</a>
+        <a href="#">Archive</a>
+      </div>
+      <div class="logo">
+        <a href="#">Tunnel Vision</a>
+      </div>
+      <div class="nav-items">
+        <a href="#">Info</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
+
+    <footer>
+      <p>Watch Showreel</p>
+      <p>Launching 2024</p>
+    </footer>
+
+    <div class="container">
+      <div class="overlay"></div>
+      <div class="slider"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script id="vertexShader" type="x-shader/x-vertex">
+      void main() {
+          gl_Position = vec4(position, 1.0);
+      }
+    </script>
+    <script id="fragmentShader" type="x-shader/x-fragment">
+      uniform vec2 iResolution;
+      uniform float iTime;
+      uniform float scrollOffset;
+
+      void mainImage(out vec4 o, vec2 I) {
+          I -= o.zw = iResolution.xy / 2.0;
+          float t = iTime * 5.0 + scrollOffset * 200.0;
+          float pattern = sin(atan(I.y, I.x) / 0.1) * sin(20.0 * (o.w /= length(I)) + t) - 1.0 + o.w;
+
+          float monochrome = 1.0 - pattern * 0.5;
+
+          float invertedMonochrome = 1.0 - monochrome;
+
+          o = vec4(invertedMonochrome, invertedMonochrome, invertedMonochrome, 1.0);
+      }
+
+      void main() {
+          mainImage(gl_FragColor, gl_FragCoord.xy);
+      }
+    </script>
+    <script type="module">
+      import { slides } from "./data.js";
+
+      const lenis = new Lenis();
+      lenis.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      const geometry = new THREE.PlaneGeometry(2, 2);
+      const uniforms = {
+        iTime: { value: 0 },
+        iResolution: {
+          value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+        },
+        scrollOffset: { value: 0 },
+      };
+
+      const material = new THREE.ShaderMaterial({
+        uniforms: uniforms,
+        vertexShader: document.getElementById("vertexShader").textContent,
+        fragmentShader: document.getElementById("fragmentShader").textContent,
+      });
+
+      const mesh = new THREE.Mesh(geometry, material);
+      scene.add(mesh);
+
+      let lastTime = 0;
+      function animateTunnel(time) {
+        const deltaTime = time - lastTime;
+        lastTime = time;
+        uniforms.iTime.value += deltaTime * 0.001;
+        renderer.render(scene, camera);
+        requestAnimationFrame(animateTunnel);
+      }
+
+      animateTunnel(0);
+
+      window.addEventListener("resize", () => {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        renderer.setSize(width, height);
+        uniforms.iResolution.value.set(width, height);
+      });
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const totalSlides = 10;
+      const zStep = 2500;
+      const initialZ = -22500;
+
+      function generateSlides() {
+        const slider = document.querySelector(".slider");
+        slider.innerHTML = "";
+
+        for (let i = 1; i <= totalSlides; i++) {
+          const slide = document.createElement("div");
+          slide.className = "slide";
+          slide.id = `slide-${i}`;
+
+          const slideImg = document.createElement("div");
+          slideImg.className = "slide-img";
+
+          const img = document.createElement("img");
+          img.src = `./assets/img${i}.jpg`;
+          img.alt = "";
+
+          const slideCopy = document.createElement("div");
+          slideCopy.classList.add("slide-copy");
+          slideCopy.innerHTML = `<p>${slides[i - 1].title}</p><p>${
+            slides[i - 1].id
+          }</p>`;
+
+          slideImg.appendChild(img);
+          slide.appendChild(slideImg);
+          slide.appendChild(slideCopy);
+          slider.appendChild(slide);
+
+          const zPosition = initialZ + (i - 1) * zStep;
+          const xPosition = i % 2 === 0 ? "30%" : "70%";
+          const opacity = i === totalSlides ? 1 : i === totalSlides - 1 ? 0 : 0;
+
+          gsap.set(slide, {
+            top: "50%",
+            left: xPosition,
+            xPercent: -50,
+            yPercent: -50,
+            z: zPosition,
+            opacity: opacity,
+          });
+        }
+      }
+
+      window.addEventListener("load", function () {
+        generateSlides();
+
+        const slides = gsap.utils.toArray(".slide");
+
+        function getInitialTranslateZ(slide) {
+          return gsap.getProperty(slide, "z");
+        }
+
+        function mapRange(value, inMin, inMax, outMin, outMax) {
+          return (
+            ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin
+          );
+        }
+
+        ScrollTrigger.create({
+          trigger: ".container",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
+          onUpdate: (self) => {
+            uniforms.scrollOffset.value = self.progress;
+          },
+        });
+
+        slides.forEach((slide, index) => {
+          const initialZ = getInitialTranslateZ(slide);
+
+          ScrollTrigger.create({
+            trigger: ".container",
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1,
+            onUpdate: (self) => {
+              const progress = self.progress;
+              const zIncrement = progress * 22500;
+              const currentZ = initialZ + zIncrement;
+
+              let opacity;
+              if (currentZ >= -2500) {
+                opacity = mapRange(currentZ, -2500, 0, 0, 1);
+              } else {
+                opacity = mapRange(currentZ, -5000, -2500, 0, 0);
+              }
+
+              slide.style.opacity = opacity;
+              slide.style.transform = `translateX(-50%) translateY(-50%) translateZ(${currentZ}px)`;
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

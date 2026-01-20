@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      raw material rebuild | sticky sidebar minimap scroll animation | @codegrid
+    </title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="map">
+        <div class="s-1">
+          <p>01</p>
+          <p>Raw Materials</p>
+        </div>
+        <div class="s-2">
+          <p>02</p>
+          <p>Hello</p>
+        </div>
+        <div class="s-3">
+          <p>03</p>
+          <p>Approach</p>
+        </div>
+        <div class="s-4">
+          <p>04</p>
+          <p>Work</p>
+        </div>
+        <div class="s-5">
+          <p>05</p>
+          <p>Talent</p>
+        </div>
+        <div class="s-6">
+          <p>06</p>
+          <p>Careers</p>
+        </div>
+        <div class="s-7">
+          <p>07</p>
+          <p>Contact</p>
+        </div>
+        <div class="s-8">
+          <p>08</p>
+          <p>Unusual Index</p>
+        </div>
+      </div>
+      <div class="sections">
+        <div class="section-1 sec">
+          <div class="header">
+            <p>01</p>
+            <p>Raw Materials</p>
+          </div>
+          <div class="copy">
+            <h1>
+              Crafting innovation from the rawest elements, where every idea
+              begins as a spark waiting to ignite.
+            </h1>
+          </div>
+        </div>
+        <div class="section-2 sec">
+          <div class="header">
+            <p>02</p>
+            <p>Hello</p>
+          </div>
+          <div class="copy">
+            <h1>
+              A warm invitation to a world where imagination reigns, and the
+              ordinary transforms into the extraordinary.
+            </h1>
+
+            <br /><br />
+            <br /><br />
+            <h1>
+              Seeking passionate souls eager to shape the future. Dive into a
+              realm where your career story flourishes.
+            </h1>
+          </div>
+        </div>
+        <div class="section-3 sec">
+          <div class="header">
+            <p>03</p>
+            <p>Approach</p>
+          </div>
+          <div class="copy">
+            <h1>
+              Our strategy navigates the vast seas of creativity, merging vision
+              with execution for unparalleled results.
+            </h1>
+          </div>
+        </div>
+        <div class="section-4 sec">
+          <div class="header">
+            <p>04</p>
+            <p>Work</p>
+          </div>
+          <div class="copy">
+            <h1>
+              Our portfolio is a testament to diligence, where every project is
+              a masterpiece shaped with dedication and finesse.
+            </h1>
+            <br /><br />
+            <br /><br />
+            <br /><br />
+            <br /><br />
+            <br /><br />
+            <br /><br />
+            <h1>
+              Crafting innovation from the rawest elements, where every idea
+              begins as a spark waiting to ignite.
+            </h1>
+          </div>
+        </div>
+        <div class="section-5 sec">
+          <div class="header">
+            <p>05</p>
+            <p>Talent</p>
+          </div>
+          <div class="copy">
+            <h1>
+              Harnessing brilliance from every corner, our team is a fusion of
+              diverse skills and innovative minds.
+            </h1>
+            <br /><br />
+            <h1>
+              Seeking passionate souls eager to shape the future. Dive into a
+              realm where your career story flourishes.
+            </h1>
+          </div>
+        </div>
+        <div class="section-6 sec">
+          <div class="header">
+            <p>06</p>
+            <p>Careers</p>
+          </div>
+          <div class="copy">
+            <h1>
+              Seeking passionate souls eager to shape the future. Dive into a
+              realm where your career story flourishes.
+            </h1>
+          </div>
+        </div>
+        <div class="section-7 sec">
+          <div class="header">
+            <p>07</p>
+            <p>Contact</p>
+          </div>
+          <div class="copy">
+            <h1>
+              We're a conversation away. Let's connect, converge ideas, and
+              bring dreams to vibrant life.
+            </h1>
+          </div>
+        </div>
+        <div class="section-8 sec">
+          <div class="header">
+            <p>08</p>
+            <p>Unusual Index</p>
+          </div>
+          <div class="copy">
+            <h1>
+              Step into our index of the unique and unexpected. It's where
+              convention breaks and creativity takes flight.
+            </h1>
+            <br /><br />
+            <br /><br />
+            <br /><br />
+            <br /><br />
+            <br /><br />
+            <br /><br />
+            <br /><br />
+            <h1>
+              A warm invitation to a world where imagination reigns, and the
+              ordinary transforms into the extraordinary.
+            </h1>
+          </div>
+        </div>
+        <div class="whitespace"></div>
+      </div>
+    </div>
+
+    <script>
+      const mapDivs = document.querySelectorAll(".map > div");
+      const sectionDivs = document.querySelectorAll(".sections > .sec");
+      const sectionHeights = [];
+      const accumulatedHeights = [];
+      const RATIO = 0.5;
+
+      let accumulatedHeight = 0;
+      sectionDivs.forEach((section) => {
+        const height = section.clientHeight;
+        sectionHeights.push(height * RATIO);
+        accumulatedHeight += height;
+        accumulatedHeights.push(accumulatedHeight);
+      });
+
+      let lastActiveIndex = -1;
+
+      function updateMapHeights(scrollPos) {
+        for (let i = 0; i < accumulatedHeights.length; i++) {
+          if (i === 0 && scrollPos < accumulatedHeights[i]) {
+            if (lastActiveIndex !== i) {
+              if (lastActiveIndex >= 0) {
+                mapDivs[lastActiveIndex].style.height = "100px";
+              }
+              mapDivs[i].style.height = `${sectionHeights[i]}px`;
+              lastActiveIndex = i;
+            }
+
+            break;
+          } else if (
+            i > 0 &&
+            scrollPos >= accumulatedHeights[i - 1] &&
+            scrollPos < accumulatedHeights[i]
+          ) {
+            if (lastActiveIndex !== i) {
+              if (lastActiveIndex >= 0) {
+                mapDivs[lastActiveIndex].style.height = "100px";
+              }
+              mapDivs[i].style.height = `${sectionHeights[i]}px`;
+              lastActiveIndex = i;
+            }
+            break;
+          }
+        }
+      }
+
+      const sectionsTotalHeight = [...sectionDivs].reduce(
+        (sum, section) => sum + section.clientHeight,
+        0
+      );
+      const mapTotalHeight =
+        [...mapDivs].reduce((sum, mapDiv) => sum + mapDiv.clientHeight, 0) +
+        (mapDivs.length - 1) * 75;
+
+      const sectionsScrollableHeight = sectionsTotalHeight - window.innerHeight;
+      const mapScrollableHeight = mapTotalHeight - window.innerHeight;
+
+      const scrollRatio = mapScrollableHeight / sectionsScrollableHeight;
+
+      window.addEventListener("scroll", () => {
+        const scrollPos = window.scrollY;
+
+        const mapTranslateY = scrollPos * scrollRatio;
+        document.querySelector(
+          ".map"
+        ).style.transform = `translateY(-${mapTranslateY}px)`;
+
+        updateMapHeights(scrollPos);
+        updateMapHeights(scrollPos);
+      });
+    </script>
+  </body>
+</html>

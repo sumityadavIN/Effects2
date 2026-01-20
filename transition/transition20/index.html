@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inversa Scroll Animation | Codegrid</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="https://unpkg.com/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+  <section class="hero">
+    <div class="hero-img">
+      <img src="./public/hero-img.jpg" alt="" />
+    </div>
+
+    <div class="hero-mask"></div>
+
+    <div class="hero-grid-overlay">
+      <img src="./public/grid-overlay.svg" alt="" />
+    </div>
+
+    <div class="marker marker-1">
+      <span class="marker-icon"></span>
+      <p class="marker-label">Anchor Field</p>
+    </div>
+
+    <div class="marker marker-2">
+      <span class="marker-icon"></span>
+      <p class="marker-label">Drift Field</p>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-content-block">
+        <div class="hero-content-copy">
+          <h1>Location Framework</h1>
+        </div>
+      </div>
+      <div class="hero-content-block">
+        <div class="hero-content-copy">
+          <h2>Coordinate Mapping</h2>
+          <p>
+            Terrain data is interpreted through directional vectors. Movement
+            responds to relative position rather than absolute distance.
+          </p>
+        </div>
+      </div>
+      <div class="hero-content-block">
+        <div class="hero-content-copy">
+          <h2>Active Locations</h2>
+          <p>
+            Key points are indexed within the field. Each location functions
+            as a reference for spatial alignment and transition logic.
+          </p>
+        </div>
+      </div>
+      <div class="hero-content-block">
+        <div class="hero-content-copy">
+          <h2>Spatial Center</h2>
+          <p>
+            The system converges toward a balanced focal region. Motion
+            decelerates as positional variance reaches equilibrium.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-progress-bar"></div>
+  </section>
+
+  <section class="outro">
+    <p>The system has reached its final spatial state.</p>
+  </section>
+  <script src="./script.js" defer></script>
+</body>
+
+</html>

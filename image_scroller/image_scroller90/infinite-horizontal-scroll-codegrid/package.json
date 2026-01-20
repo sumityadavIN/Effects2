@@ -1,0 +1,17 @@
+{
+  "name": "infinite-horizontal-scroll-codegrid",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "host": "vite --host"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "vite": "^6.2.0"
+  }
+}

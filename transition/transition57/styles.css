@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  color: #fff;
+  overflow: hidden;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menu-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.menu-img::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 0, 0);
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.75) 50%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  z-index: 1;
+}
+
+.menu {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.menu.is-dragging {
+  cursor: grabbing;
+}
+
+.menu-wrapper {
+  list-style: none;
+}
+
+.menu-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 4em 0;
+  display: flex;
+  gap: 2em;
+}
+
+.item-category {
+  flex: 2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.item-name {
+  flex: 4;
+  display: flex;
+  align-items: flex-end;
+}
+
+.item-category p {
+  font-family: "Dharma Gothic M";
+  font-size: 40px;
+  text-transform: uppercase;
+}
+
+.item-name p {
+  font-family: "RL-Unno Test", serif;
+  font-size: 120px;
+  line-height: 90%;
+}

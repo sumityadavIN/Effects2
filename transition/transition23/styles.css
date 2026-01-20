@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #a19f94;
+  font-family: "PP Rader";
+}
+
+.spacer {
+  height: 800px;
+}
+
+.marquee {
+  position: relative;
+  background: #0f0f0f;
+  color: #eee;
+  padding: 32px 0;
+  font-weight: 600;
+  font-size: 40px;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.marquee__inner {
+  display: flex;
+  width: fit-content;
+  flex: auto;
+  flex-direction: row;
+}
+
+.marquee__part {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 0 4px;
+}
+
+.arrow {
+  width: 60px;
+  height: 80px;
+  margin: 0 1em;
+  transform: rotate(90deg);
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.arrow.active {
+  transform: rotate(-90deg);
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}

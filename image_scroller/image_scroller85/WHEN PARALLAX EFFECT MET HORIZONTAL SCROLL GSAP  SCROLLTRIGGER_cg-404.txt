@@ -1,0 +1,1 @@
+Source Path: C:\xampp\htdocs\effects\CodeGrid_Zip\Effects - Copy\WHEN PARALLAX EFFECT MET HORIZONTAL SCROLL (GSAP & SCROLLTRIGGER)\cg-404\index.html

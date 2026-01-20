@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Tunnel Using Shaders | Codegrid</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-items">
+        <a href="#">Works</a>
+        <a href="#">Archive</a>
+      </div>
+      <div class="logo">
+        <a href="#">Tunnel Vision</a>
+      </div>
+      <div class="nav-items">
+        <a href="#">Info</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
+
+    <footer>
+      <p>Watch Showreel</p>
+      <p>Launching 2024</p>
+    </footer>
+
+    <div class="container">
+      <h1>
+        A Journey Through Neon Tunnels <br />
+        and Digital Couture Awaits
+      </h1>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script id="vertexShader" type="x-shader/x-vertex">
+      void main() {
+          gl_Position = vec4(position, 1.0);
+      }
+    </script>
+    <script id="fragmentShader" type="x-shader/x-fragment">
+      uniform vec2 iResolution;
+      uniform float iTime;
+      uniform float scrollOffset;
+
+      void mainImage( out vec4 o, vec2 I ) {
+          I -= o.zw = iResolution.xy / 2.;
+          float t = iTime * 5.0 + scrollOffset * 0.1;
+          o = 1. - vec4(.5,1,9,0) *
+              ( sin(atan(I.y,I.x)/.1) * sin(20.*(o.w/=length(I))+t) - 1. + o.w );
+      }
+
+      void main() {
+          mainImage(gl_FragColor, gl_FragCoord.xy);
+      }
+    </script>
+    <script>
+      const scene = new THREE.Scene();
+      const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      const geometry = new THREE.PlaneGeometry(2, 2);
+      const uniforms = {
+        iTime: { value: 0 },
+        iResolution: {
+          value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+        },
+        scrollOffset: { value: 0 },
+      };
+
+      const material = new THREE.ShaderMaterial({
+        uniforms: uniforms,
+        vertexShader: document.getElementById("vertexShader").textContent,
+        fragmentShader: document.getElementById("fragmentShader").textContent,
+      });
+
+      const mesh = new THREE.Mesh(geometry, material);
+      scene.add(mesh);
+
+      let scrollVelocity = 0;
+      const scrollDamping = 0.92;
+      const scrollSensitivity = 0.025;
+
+      function handleScroll(event) {
+        event.preventDefault();
+        scrollVelocity += event.deltaY * scrollSensitivity;
+      }
+
+      window.addEventListener("wheel", handleScroll, { passive: false });
+
+      function animate(time) {
+        requestAnimationFrame(animate);
+        uniforms.iTime.value = time * 0.001;
+
+        uniforms.scrollOffset.value += scrollVelocity;
+
+        scrollVelocity *= scrollDamping;
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+
+      window.addEventListener("resize", onWindowResize, false);
+
+      function onWindowResize() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        renderer.setSize(width, height);
+        uniforms.iResolution.value.set(width, height);
+      }
+    </script>
+  </body>
+</html>

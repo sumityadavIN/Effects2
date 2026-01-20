@@ -1,0 +1,1 @@
+Source Path: C:\xampp\htdocs\effects\CodeGrid_Zip\Effects - Copy\MODERN MINIMALIST TEXT REVEAL ON SCROLL ANIMATION  GSAP  SCROLLTRIGGER  HTML, CSS & JAVASCRIPT\scrolltrigger text reveal\index.html

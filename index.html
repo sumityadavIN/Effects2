@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Effects Gallery</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .header {
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            align-items: center;
+        }
+
+        .sort-select {
+            padding: 0.75rem 1.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sort-select:hover,
+        .sort-select:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #667eea;
+        }
+
+        .sort-select option {
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        .search-box {
+            padding: 0.75rem 1.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 0.9rem;
+            width: 300px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            border-color: #667eea;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: capitalize;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: transparent;
+            color: #fff;
+        }
+
+        .stats {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .category-section {
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            text-transform: capitalize;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .category-title .count {
+            background: rgba(102, 126, 234, 0.3);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .project-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(102, 126, 234, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card h3 {
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .project-card .path {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 0.5rem;
+            word-break: break-all;
+        }
+
+        .serial-number {
+            color: rgba(255, 255, 255, 0.3);
+            margin-right: 0.5rem;
+            font-weight: 400;
+            font-size: 0.9em;
+            font-family: monospace;
+        }
+
+        .rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.8rem;
+            color: #fca311;
+            background: rgba(252, 163, 17, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+
+        .project-card .arrow {
+            display: inline-block;
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.75rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .controls {
+                padding: 0 1rem;
+            }
+
+            .header.hide {
+                transform: translateY(-100%);
+            }
+        }
+
+        .header {
+            transition: transform 0.3s ease;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .badge.html {
+            background: rgba(102, 126, 234, 0.2);
+            color: #a3bffa;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .badge.react {
+            background: rgba(224, 73, 234, 0.2);
+            color: #fca3fa;
+            border: 1px solid rgba(224, 73, 234, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>AFTER EFFECTS</h1>
+        <p>A collection of beautiful web effects and animations</p>
+        <div class="controls">
+            <input type="text" class="search-box" id="searchBox" placeholder="Search effects...">
+            <select class="sort-select" id="sortSelect">
+                <option value="default">Default</option>
+                <option value="rating-desc">Rating: High to Low</option>
+                <option value="rating-asc">Rating: Low to High</option>
+            </select>
+            <button class="filter-btn active" data-filter="all">All</button>
+        </div>
+        <div class="stats" id="stats"></div>
+    </header>
+
+    <main class="container" id="projectsContainer"></main>
+
+    <script type="module">
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            const module = await import('./projects.js?v=' + Date.now());
+            const projectData = module.default;
+
+            const container = document.getElementById('projectsContainer');
+            const sortSelect = document.getElementById('sortSelect');
+            const header = document.querySelector('.header');
+
+            // Scroll Hide Logic
+            let lastScrollY = window.scrollY;
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.scrollY;
+
+                if (currentScrollY > 50) {
+                    if (currentScrollY > lastScrollY) {
+                        header.classList.add('hide');
+                    } else {
+                        header.classList.remove('hide');
+                    }
+                } else {
+                    header.classList.remove('hide');
+                }
+                lastScrollY = currentScrollY;
+            }, { passive: true });
+
+            let activeFilter = 'all';
+            let activeSort = 'default';
+
+            // Create filter buttons
+            const categories = [...new Set(projectData.map(p => p.category))];
+            const controls = document.querySelector('.controls');
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn';
+                btn.dataset.filter = cat;
+                btn.textContent = cat.replace(/_/g, ' ');
+                controls.appendChild(btn);
+            });
+
+            // Filter button clicks
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    activeFilter = btn.dataset.filter;
+                    renderProjects();
+                });
+            });
+
+            // Search
+            searchBox.addEventListener('input', renderProjects);
+
+            // Sort
+            sortSelect.addEventListener('change', (e) => {
+                activeSort = e.target.value;
+                renderProjects();
+            });
+
+            function renderProjects() {
+                const query = searchBox.value.toLowerCase();
+                let filtered = projectData;
+
+                if (activeFilter !== 'all') {
+                    filtered = filtered.filter(p => p.category === activeFilter);
+                }
+
+                if (query) {
+                    filtered = filtered.filter(p => p.name.toLowerCase().includes(query));
+                }
+
+                // Sort
+                if (activeSort === 'rating-desc') {
+                    filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+                } else if (activeSort === 'rating-asc') {
+                    filtered.sort((a, b) => (a.rating || 0) - (b.rating || 0));
+                }
+                // 'default' keeps original order
+
+                // Group by category
+                const grouped = {};
+                filtered.forEach(p => {
+                    if (!grouped[p.category]) grouped[p.category] = [];
+                    grouped[p.category].push(p);
+                });
+
+                // Render
+                container.innerHTML = '';
+
+                if (filtered.length === 0) {
+                    container.innerHTML = '<div class="no-results">No effects found matching your criteria.</div>';
+                    stats.textContent = '0 effects';
+                    return;
+                }
+
+                let globalIndex = 0;
+
+                Object.keys(grouped).sort().forEach(category => {
+                    const section = document.createElement('section');
+                    section.className = 'category-section';
+                    section.dataset.category = category;
+
+                    section.innerHTML = `
+            <h2 class="category-title">
+              ${category.replace(/_/g, ' ')}
+              <span class="count">${grouped[category].length}</span>
+            </h2>
+            <div class="projects-grid">
+              ${grouped[category].map(p => {
+                        const isReact = p.type === 'react';
+                        const indexPath = p.indexpath || '#';
+                        const linkPath = isReact ? indexPath.replace('package.json', '') : indexPath;
+
+                        globalIndex++;
+                        const serial = String(globalIndex).padStart(3, '0');
+                        const rating = p.rating ? p.rating.toFixed(1) : '0.0';
+
+                        return `
+                <a href="${linkPath}" class="project-card" target="_self">
+                  <div class="card-header">
+                    <h3><span class="serial-number">#${serial}</span> ${p.name}</h3>
+                    <span class="rating-badge">★ ${rating}</span>
+                  </div>
+                </a>
+                `;
+                    }).join('')}
+            </div>
+          `;
+
+                    container.appendChild(section);
+                });
+
+                stats.textContent = `${filtered.length} effect${filtered.length !== 1 ? 's' : ''} found`;
+            }
+
+            renderProjects();
+        });
+    </script>
+</body>
+
+</html>

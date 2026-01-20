@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>some-clean-gallery</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container" data-scroll-container>
+      <h1 data-scroll-section>drive / moments</h1>
+      <div class="gallery" data-scroll-section></div>
+    </div>
+    <div class="img-modal">
+      <div class="img-name modal-item">
+        <p>img name</p>
+        <div class="modal-item-revealer"></div>
+      </div>
+      <div class="close-btn modal-item">
+        <p>close</p>
+        <div class="modal-item-revealer"></div>
+      </div>
+      <div class="img">
+        <img src="./assets/img1.jpeg" alt="" />
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
+    <script src="./script.js"></script>
+    <script>
+      window.addEventListener("load", () => {
+        const scroll = new LocomotiveScroll({
+          el: document.querySelector("[data-scroll-container]"),
+          smooth: true,
+          multiplier: 0.75,
+          scrollFromAnywhere: true,
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Full Screen Carousel - London Alley Rebuild</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+
+  <body>
+    <!-- Swiper -->
+    <div class="container">
+      <div class="nav-left nav"><span>london alley</span></div>
+      <div class="swiper mySwiper">
+        <div class="slider-nav">
+          <div class="button-next">
+            <ion-icon name="arrow-forward-sharp"></ion-icon>
+          </div>
+          <div class="button-prev">
+            <ion-icon name="arrow-back-sharp"></ion-icon>
+          </div>
+        </div>
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="slider-copy">
+              <div class="header">roddy ricch</div>
+              <div class="song-details">
+                <div class="song-name">late at night</div>
+                <div class="artist">Joseph Boyd</div>
+              </div>
+            </div>
+            <img src="./gifs/roddy.gif" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <div class="slider-copy">
+              <div class="header">tyga</div>
+              <div class="song-details">
+                <div class="song-name">rack city</div>
+                <div class="artist">mike free</div>
+              </div>
+            </div>
+            <img src="./gifs/roddy.gif" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <div class="slider-copy">
+              <div class="header">travis scott</div>
+              <div class="song-details">
+                <div class="song-name">butterfly effect</div>
+                <div class="artist">mike dean</div>
+              </div>
+            </div>
+            <img src="./gifs/roddy.gif" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="nav-right nav">
+        <div class="nav-items"><ion-icon name="pause-sharp"></ion-icon></div>
+        <div class="nav-items">
+          <div>advertising</div>
+          <div>content</div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="bottom-nav">your content goes from here</div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        navigation: {
+          nextEl: ".button-next",
+          prevEl: ".button-prev",
+        },
+      });
+    </script>
+  </body>
+</html>

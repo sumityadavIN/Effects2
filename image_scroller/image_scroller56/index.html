@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>video carousel</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  </head>
+  <body>
+    <div class="logo"><a href="#">Mercure</a></div>
+    <div class="nav">
+      <div class="nav-items primary">
+        <a href="#" id="main-branch">Main Event</a>
+        <a href="#">Design Works</a>
+        <a href="#">Short Films</a>
+      </div>
+      <div class="nav-items">
+        <a href="#">2023</a>
+      </div>
+    </div>
+    <div class="container">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <video src="./videos/vid-1.mp4" autoplay loop muted></video>
+            <div class="carousel-caption blur">
+              <div class="row">
+                <div class="row-items">
+                  <ion-icon name="add-sharp"></ion-icon>
+                  <span> A feast for the eyes </span>
+                </div>
+                <div class="row-items">
+                  <ion-icon name="add-sharp"></ion-icon>
+                </div>
+              </div>
+              <div class="row">
+                <div class="header">
+                  <p>Story of volatile fashion</p>
+                  <h1>Turbulence</h1>
+                </div>
+              </div>
+              <div class="row">
+                <div class="row">
+                  <div class="row-items">
+                    <ion-icon name="add-sharp"></ion-icon>
+                    <span>Digital boutique</span>
+                  </div>
+                  <div class="row-items">
+                    <span>Indie</span>
+                    <ion-icon name="add-sharp"></ion-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <video src="./videos/vid-2.mp4" autoplay loop muted></video>
+            <div class="carousel-caption">
+              <div class="row">
+                <div class="row-items">
+                  <ion-icon name="add-sharp"></ion-icon>
+                  <span> The big pilot roadshow </span>
+                </div>
+                <div class="row-items">
+                  <ion-icon name="add-sharp"></ion-icon>
+                </div>
+              </div>
+              <div class="row">
+                <div class="header">
+                  <p>A story to be discovered</p>
+                  <h1>Association</h1>
+                </div>
+              </div>
+              <div class="row">
+                <div class="row">
+                  <div class="row-items">
+                    <ion-icon name="add-sharp"></ion-icon>
+                    <span>Roland mouret</span>
+                  </div>
+                  <div class="row-items">
+                    <span>Soul</span>
+                    <ion-icon name="add-sharp"></ion-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <video src="./videos/vid-3.mp4" autoplay loop muted></video>
+            <div class="carousel-caption">
+              <div class="row">
+                <div class="row-items">
+                  <ion-icon name="add-sharp"></ion-icon>
+                  <span> Objects of culture </span>
+                </div>
+                <div class="row-items">
+                  <ion-icon name="add-sharp"></ion-icon>
+                </div>
+              </div>
+              <div class="row">
+                <div class="header">
+                  <p>The pleasure pursuit</p>
+                  <h1>Vermillion</h1>
+                </div>
+              </div>
+              <div class="row">
+                <div class="row">
+                  <div class="row-items">
+                    <ion-icon name="add-sharp"></ion-icon>
+                    <span>Keeping pace</span>
+                  </div>
+                  <div class="row-items">
+                    <span>Culture</span>
+                    <ion-icon name="add-sharp"></ion-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <a
+          class="carousel-control-prev"
+          href="#myCarousel"
+          role="button"
+          data-slide="prev"
+        >
+          <ion-icon name="arrow-back-sharp"></ion-icon>
+        </a>
+        <a
+          class="carousel-control-next"
+          href="#myCarousel"
+          role="button"
+          data-slide="next"
+        >
+          <ion-icon name="arrow-forward-sharp"></ion-icon>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      const carouselItems = document.querySelectorAll(".carousel-item");
+      document
+        .querySelector(".carousel-item:first-child .carousel-caption")
+        .classList.add("animate-in");
+
+      carouselItems.forEach((item) => {
+        item.addEventListener("transitionend", (e) => {
+          if (e.target.classList.contains("active")) {
+            const caption = e.target.querySelector(".carousel-caption");
+            if (caption) {
+              caption.classList.add("animate-in");
+            }
+          } else {
+            const caption = e.target.querySelector(".carousel-caption");
+            if (caption) {
+              caption.classList.remove("animate-in");
+            }
+          }
+        });
+      });
+
+      // Enable swipe and drag feature for Bootstrap carousel
+      // $(".carousel").on("touchstart", function (event) {
+      //   var xClick = event.originalEvent.touches[0].pageX;
+      //   $(this).one("touchmove", function (event) {
+      //     var xMove = event.originalEvent.touches[0].pageX;
+      //     if (Math.floor(xClick - xMove) > 5) {
+      //       $(this).carousel("next");
+      //     } else if (Math.floor(xClick - xMove) < -5) {
+      //       $(this).carousel("prev");
+      //     }
+      //   });
+      //   $(this).on("touchend", function () {
+      //     $(this).off("touchmove");
+      //   });
+      // });
+
+      // // Enable swipe and drag feature for Bootstrap carousel
+      // $(".carousel").on("mousedown", function (event) {
+      //   var xClick = event.pageX;
+      //   $(this).one("mouseup", function (event) {
+      //     var xMove = event.pageX;
+      //     if (Math.floor(xClick - xMove) > 5) {
+      //       $(this).carousel("next");
+      //     } else if (Math.floor(xClick - xMove) < -5) {
+      //       $(this).carousel("prev");
+      //     }
+      //   });
+      // });
+    </script>
+  </body>
+</html>

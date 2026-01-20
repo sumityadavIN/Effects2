@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Scroll Animation | Awwwards SOTD Rebuild | Codegrid</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="nav">
+        <div class="logo">
+          <a href="#">AlphaFlame</a>
+          <div class="logo-revealer"></div>
+        </div>
+      </div>
+      <div class="header">
+        <div class="letter">
+          <img src="./letters/A.png" alt="" />
+        </div>
+        <div class="letter">
+          <img src="./letters/L.png" alt="" />
+        </div>
+        <div class="letter">
+          <img src="./letters/P.png" alt="" />
+        </div>
+        <div class="letter">
+          <img src="./letters/H.png" alt="" />
+        </div>
+        <div class="letter">
+          <img src="./letters/A.png" alt="" />
+        </div>
+        <div class="letter">
+          <img src="./letters/F.png" alt="" />
+        </div>
+        <div class="letter">
+          <img src="./letters/L.png" alt="" />
+        </div>
+        <div class="letter">
+          <img src="./letters/A.png" alt="" />
+        </div>
+        <div class="letter">
+          <img src="./letters/M.png" alt="" />
+        </div>
+        <div class="letter">
+          <img src="./letters/E.png" alt="" />
+        </div>
+      </div>
+
+      <div class="website-content">
+        <div class="website-content-wrapper">
+          <h1>
+            Pioneering the uncharted frontiers of <br />
+            tomorrow's energy landscape
+          </h1>
+          <div class="img">
+            <img src="./hero.jpg" alt="" />
+          </div>
+          <p>
+            In a universe constantly expanding its horizons, Alpha Flame stands
+            as a testament to human ingenuity and determination. More than just
+            a source of power, it represents a shift in how we perceive energy
+            and progress. Join us in lighting the way to a brighter, more
+            sustainable future.
+          </p>
+
+          <br />
+          <p>
+            In the vast tapestry of technological advancements, Alpha Flame
+            emerges as a subtle thread with the potential to reshape the entire
+            design. It's not just an energy source, but a philosophy, a vision
+            of a world where sustainability and innovation coexist in harmony.
+            As we delve deeper into the intricacies of what makes Alpha Flame so
+            revolutionary, we find a narrative that speaks of human
+            perseverance, the relentless pursuit of knowledge, and an unwavering
+            commitment to crafting a future that generations to come will be
+            proud to inherit. Every flicker of the Alpha Flame is a testament to
+            our shared dream of a world unburdened by its past limitations. Join
+            us on this exciting journey as we redefine the contours of
+            possibility.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+      const header = document.querySelector(".header");
+      const letters = document.querySelectorAll(".letter");
+      const logo = document.querySelector(".logo a");
+      const websiteContent = document.querySelector(".website-content");
+
+      let lastScroll = 0;
+
+      const sectionHeight = 150;
+
+      window.addEventListener("scroll", () => {
+        const scrollY = window.scrollY;
+
+        if (scrollY < 900) {
+          websiteContent.style.position = "fixed";
+          websiteContent.style.top = "0px";
+        } else {
+          websiteContent.style.position = "absolute";
+          websiteContent.style.top = "900px";
+        }
+        const orderPairs = [
+          [4, 5],
+          [3, 6],
+          [2, 7],
+          [1, 8],
+          [0, 9],
+        ];
+
+        orderPairs.forEach((pair, orderIndex) => {
+          const startScroll = sectionHeight * orderIndex;
+
+          if (scrollY >= startScroll) {
+            const moveFactor = Math.min(
+              1,
+              (scrollY - startScroll) / sectionHeight
+            );
+            const translateY = -moveFactor * header.offsetHeight;
+
+            pair.forEach((idx) => {
+              const letter = letters[idx];
+              gsap.to(letter, {
+                y: translateY,
+                zIndex: 1 - moveFactor,
+              });
+            });
+          } else {
+            pair.forEach((idx) => {
+              const letter = letters[idx];
+              gsap.to(letter, {
+                y: 0,
+                zIndex: 1,
+              });
+            });
+          }
+        });
+
+        // Buffer to introduce delay after letters' animation before logo starts moving
+        const buffer = 50;
+
+        // Adjust logo position based on scroll position
+        if (
+          scrollY >= orderPairs.length * sectionHeight + buffer &&
+          !gsap.isTweening(logo)
+        ) {
+          gsap.to(logo, {
+            top: "0px",
+            ease: "power1.out",
+            overwrite: true,
+          });
+          gsap.to(".logo-revealer", {
+            scaleY: 0,
+            overwrite: true,
+          });
+        } else if (
+          scrollY <= (orderPairs.length - 1) * sectionHeight &&
+          !gsap.isTweening(logo)
+        ) {
+          gsap.to(logo, {
+            top: "20px",
+            ease: "power1.out",
+            overwrite: true,
+          });
+
+          gsap.to(".logo-revealer", {
+            scaleY: 1,
+            overwrite: true,
+          });
+        }
+
+        lastScroll = scrollY;
+      });
+    </script>
+  </body>
+</html>

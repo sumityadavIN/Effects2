@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lottie Scroll Animation | Codegrid</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script type="importmap">
+      {
+        "imports": {
+          "gsap": "https://esm.sh/gsap",
+          "gsap/ScrollTrigger": "https://esm.sh/gsap/ScrollTrigger",
+          "lenis": "https://esm.sh/lenis",
+          "lottie-web": "https://esm.sh/lottie-web"
+        }
+      }
+    </script>
+</head>
+
+<body>
+  <nav>
+    <a href="#">Artifact</a>
+  </nav>
+
+  <section class="hero"></section>
+
+  <section class="about">
+    <h1>Built for people who scroll</h1>
+  </section>
+
+  <div class="lottie-container">
+    <div class="lottie"></div>
+    <div class="hero-img">
+      <img src="public/hero-img.jpg" alt="" />
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1 @@
+Source Path: C:\xampp\htdocs\effects\CodeGrid_Zip\Effects - Copy\I MADE MY TEXT EXPLODE ON SCROLL (A WILD PHYSICS-DRIVEN TEXT ANIMATION)\cg-explode-text-on-scroll-matterjs\index.html

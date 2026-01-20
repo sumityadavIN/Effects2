@@ -1,0 +1,1 @@
+Source Path: C:\xampp\htdocs\effects\CodeGrid_Zip\Effects - Copy\BUILD AN IMAGE SLIDER SO SMOOTH WITH JAVASCRIPT, IT SHOULD BE ILLEGAL\cg-pure-js-vanilla-image-slider\index.html

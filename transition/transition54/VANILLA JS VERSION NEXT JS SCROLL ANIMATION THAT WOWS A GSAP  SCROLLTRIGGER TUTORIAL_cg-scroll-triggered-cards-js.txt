@@ -1,0 +1,1 @@
+Source Path: C:\xampp\htdocs\effects\CodeGrid_Zip\Effects - Copy\VANILLA JS VERSION NEXT JS SCROLL ANIMATION THAT WOWS (A GSAP & SCROLLTRIGGER TUTORIAL)\cg-scroll-triggered-cards-js\index.html
